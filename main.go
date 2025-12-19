@@ -23,23 +23,23 @@ func main() {
 	})
 
 	http.HandleFunc("/get", func(w http.ResponseWriter, r *http.Request) {
-	key := r.URL.Query().Get("key")
-	if key == "" {
-		http.Error(w, "missing key", 400)
-		return
-	}
+		key := r.URL.Query().Get("key")
+		if key == "" {
+			http.Error(w, "missing key", 400)
+			return
+		}
 
-	// read committed state directly
-	val, err := store.Get(key)
-	if err != nil {
-		http.Error(w, err.Error(), 404)
-		return
-	}
+		// read committed state directly
+		val, err := store.Get(key)
+		if err != nil {
+			http.Error(w, err.Error(), 404)
+			return
+		}
 
-	json.NewEncoder(w).Encode(map[string]any{
-		"value": val,
+		json.NewEncoder(w).Encode(map[string]any{
+			"value": val,
+		})
 	})
-})
 
 	http.HandleFunc("/txn/", func(w http.ResponseWriter, r *http.Request) {
 		parts := strings.Split(strings.Trim(r.URL.Path, "/"), "/")
