@@ -1,0 +1,16 @@
+# Go
+/bin/
+/pkg/
+/*.exe
+*.test
+*.out
+
+# WAL & runtime files
+wal.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
